@@ -9,18 +9,18 @@ if (!isset($_FILES["userfile"])) {
     return;
 }
 
-if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-    $tmp_name = $_FILES['userfile']['tmp_name'];
-    $userfile_name = explode('.', $_FILES['userfile']['name']);
-    $filename = array_shift($userfile_name);
-    $ext = reset($userfile_name);
+if (is_uploaded_file($_FILES['userfile']['tmp_name'])) { //Проверяет был ли загружен файл
+    $tmp_name = $_FILES['userfile']['tmp_name']; //путь к временному файлу, который мы выбрали
+    $userfile_name = explode('.', $_FILES['userfile']['name']); //разбиваем имя файла и записываем в массив
+    $filename = array_shift($userfile_name); // записывает имя файла без расширения
+    $ext = reset($userfile_name); // записывает расширение файла
 
-    if (!in_array($ext, $valid_types)) {
+    if (!in_array($ext, $valid_types)) { // проверяет расширение файла
         echo('Ошибка: Неверный тип файла.');
         return;
     }
 
-    if (move_uploaded_file($tmp_name, $tmp_path_file . '/1.csv')) {
+    if (move_uploaded_file($tmp_name, $tmp_path_file . '/1.csv')) { 
         $data_file = fopen($tmp_path_file . '/1.csv', 'r');
 
         echo('<table border="1">');
