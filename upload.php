@@ -1,6 +1,7 @@
 <?php
-$valid_types = array('csv');
-$tmp_path_file = sys_get_temp_dir();
+//Объявление начальных переменных
+$valid_types = array('csv'); //тип файла, который можно загружать
+$tmp_path_file = sys_get_temp_dir(); //получение пути временной папки, куда будем записывать загружаемый файл
 $n_line = 0;
 
 if (!isset($_FILES["userfile"])) {
@@ -35,6 +36,7 @@ if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
             $n_line++;
         }
         echo('</table>');
+        fclose($tmp_path_file . '/1.csv');
 
     } else {
         echo('Ошибка: Файл не создан.');
